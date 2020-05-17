@@ -34,7 +34,7 @@ app.use(express.static("public"));
 
 // GET /api/notes - Should read the db.json file and return all saved notes as JSON.
     app.get("/api/notes", function (req, res) {
-        res.sendFile(path.join(__dirname, "/db/db.json"))
+        res.sendFile(path.join(__dirname, "./db/db.json"))
         });
 
 // POST /api/notes - Should receive a new note to save on the request body, add it to the db.json file, 
@@ -45,7 +45,7 @@ app.use(express.static("public"));
           newNote.id = uniqid();
         };
         dbNotes.push(newNote);
-        fs.writeFile(path.join(__dirname, "./db/db.json"), JSON.stringify(db));
+        fs.writeFile(path.join(__dirname, "./db/db.json"), JSON.stringify(dbNotes));
         res.json(newNote);
         });
 
@@ -56,10 +56,8 @@ app.use(express.static("public"));
 
     app.delete("/api/notes/:id", function (req, res) {
         let noteId = req.params.id;
-        fs.writeFile(path.join(__dirname, "./db/db.json"), JSON.stringify(db));
-
-
-    })
+        fs.writeFile(path.join(__dirname, "/db/db.json"), JSON.stringify(dbNotes));
+    });
 
    
 
